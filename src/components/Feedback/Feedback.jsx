@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import css from './Feedback.module.css';
 import FeedbackOptions from './FeedbackOptions';
 import FeedbackButtons from './FeedbackButtons';
+import FeedbackTitle from './FeedbackTitle';
 
 export default class Feedback extends Component {
   state = {
@@ -35,15 +36,16 @@ export default class Feedback extends Component {
 
     return (
       <div className={css.container}>
-        <h1 className={css.title}>Please leave feedback</h1>
-        <FeedbackButtons />
-        <FeedbackOptions
-          good={this.state.good}
-          neutral={this.state.neutral}
-          bad={this.state.bad}
-          total={totalFeedback}
-          positiveFeedback={positiveFeedback}
-        />
+        <FeedbackTitle className={css.title} title="Please leave feedback">
+          <FeedbackButtons FeedbackFunction={this.handleOption} />
+          <FeedbackOptions
+            good={this.state.good}
+            neutral={this.state.neutral}
+            bad={this.state.bad}
+            total={totalFeedback}
+            positiveFeedback={positiveFeedback}
+          />
+        </FeedbackTitle>
       </div>
     );
   }
