@@ -3,6 +3,7 @@ import css from './Feedback.module.css';
 import FeedbackOptions from './FeedbackOptions';
 import FeedbackButtons from './FeedbackButtons';
 import FeedbackTitle from './FeedbackTitle';
+import Notification from './Notification';
 
 export default class Feedback extends Component {
   state = {
@@ -38,13 +39,17 @@ export default class Feedback extends Component {
       <div className={css.container}>
         <FeedbackTitle className={css.title} title="Please leave feedback">
           <FeedbackButtons FeedbackFunction={this.handleOption} />
-          <FeedbackOptions
-            good={this.state.good}
-            neutral={this.state.neutral}
-            bad={this.state.bad}
-            total={totalFeedback}
-            positiveFeedback={positiveFeedback}
-          />
+          {totalFeedback === 0 ? (
+            <Notification message={'There is no feedback'} />
+          ) : (
+            <FeedbackOptions
+              good={this.state.good}
+              neutral={this.state.neutral}
+              bad={this.state.bad}
+              total={totalFeedback}
+              positiveFeedback={positiveFeedback}
+            />
+          )}
         </FeedbackTitle>
       </div>
     );
