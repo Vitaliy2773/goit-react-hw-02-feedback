@@ -1,21 +1,17 @@
-import React from 'react';
 import css from './Feedback.module.css';
 
-export default function FeedbackOptions({
-  good,
-  neutral,
-  bad,
-  total,
-  positiveFeedback,
-}) {
+export default function FeedbackOptions({ options, onLeaveFeedback }) {
   return (
     <div>
-      <h2 className={css.title}>Statistics</h2>
-      <p className={css.item}>Good:{good}</p>
-      <p className={css.item}>Neutral:{neutral}</p>
-      <p className={css.item}>Bad:{bad}</p>
-      <p className={css.total}>Total:{total}</p>
-      <p className={css.total}>Positive feedback:{positiveFeedback}%</p>
+      {options.map(option => (
+        <button
+          key={option}
+          onClick={() => onLeaveFeedback(option)}
+          className={css.button__statistics}
+        >
+          {option.charAt(0).toUpperCase() + option.slice(1)}
+        </button>
+      ))}
     </div>
   );
 }

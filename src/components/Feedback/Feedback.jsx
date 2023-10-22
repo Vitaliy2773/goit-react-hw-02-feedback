@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import css from './Feedback.module.css';
 import FeedbackOptions from './FeedbackOptions';
-import FeedbackButtons from './FeedbackButtons';
-import FeedbackTitle from './FeedbackTitle';
 import Notification from './Notification';
+import Section from './Section';
+import Statistics from './Statistics';
 
 export default class Feedback extends Component {
   state = {
@@ -37,20 +37,25 @@ export default class Feedback extends Component {
 
     return (
       <div className={css.container}>
-        <FeedbackTitle className={css.title} title="Please leave feedback">
-          <FeedbackButtons FeedbackFunction={this.handleOption} />
-          {totalFeedback === 0 ? (
-            <Notification message={'There is no feedback'} />
-          ) : (
-            <FeedbackOptions
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            options={Object.keys(this.state)}
+            onLeaveFeedback={this.handleOption}
+          />
+        </Section>
+        {totalFeedback === 0 ? (
+          <Notification message={'There is no feedback'} />
+        ) : (
+          <Section title="Statistics">
+            <Statistics
               good={this.state.good}
               neutral={this.state.neutral}
               bad={this.state.bad}
               total={totalFeedback}
               positiveFeedback={positiveFeedback}
             />
-          )}
-        </FeedbackTitle>
+          </Section>
+        )}
       </div>
     );
   }
